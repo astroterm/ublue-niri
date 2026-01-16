@@ -40,20 +40,9 @@ metadata_expire=1h" | tee /etc/yum.repos.d/vscodium.repo
 
 
 # Package installation
-dnf5 -y install \
+dnf5 install -y --setopt=tsflags=noscripts \
     greetd steam nautilus codium nushell \
-    niri dms wezterm google-roboto-fonts google-roboto-mono-fonts \
-|| {
-    echo "DNF FAILED — dumping logs"
-    ls -lah /var/log || true
-    echo "---- /var/log/dnf* ----"
-    tail -n 400 /var/log/dnf* 2>/dev/null || true
-    echo "---- /var/log/dnf5.log ----"
-    tail -n 400 /var/log/dnf5.log 2>/dev/null || true
-    echo "---- /var/log/rpm* ----"
-    tail -n 400 /var/log/rpm* 2>/dev/null || true
-    exit 1
-}
+    niri dms wezterm google-roboto-fonts google-roboto-mono-fonts
 
 # Group package installation
 dnf5 group install development-tools -y
