@@ -41,7 +41,6 @@ metadata_expire=1h" | tee /etc/yum.repos.d/vscodium.repo
 
 # Package installation
 dnf5 -y install --setopt=tsflags=noscripts nushell
-dnf5 -y install https://vencord.dev/download/vesktop/amd64/rpm
 dnf5 install -y \
     greetd nautilus steam codium \
     niri dms wezterm google-roboto-fonts google-roboto-mono-fonts
