@@ -27,9 +27,9 @@ dnf5 install -y niri dms wezterm
 dnf5 install -y google-roboto-fonts google-roboto-mono-fonts
 
 # Group package installation
-dnf5 group install development-tools
-dnf5 group install system-tools
-dnf5 group install virtualization
+dnf5 group install development-tools -y
+dnf5 group install system-tools -y 
+dnf5 group install virtualization -y
 
 # System Unit Files
 systemctl enable podman.socket
