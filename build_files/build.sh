@@ -40,8 +40,8 @@ metadata_expire=1h" | tee /etc/yum.repos.d/vscodium.repo
 
 
 # Package installation
-dnf5 install -y --setopt=tsflags=noscripts \
-    greetd steam nautilus codium nushell \
+dnf5 install -y \
+    greetd nautilus nushell \
     niri dms wezterm google-roboto-fonts google-roboto-mono-fonts
 
 # Group package installation
