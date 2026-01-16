@@ -35,3 +35,6 @@ dnf5 group install virtualization
 systemctl enable podman.socket
 systemctl enable greetd
 systemctl --user enable dms
+
+dnf5 -y copr disable avengemedia/dms
+dnf5 -y copr disable wezfurlong/wezterm-nightly
