@@ -22,7 +22,7 @@ dnf5 -y copr enable avengemedia/dms
 dnf5 -y copr enable wezfurlong/wezterm-nightly
 
 # Package installation
-dnf5 install -y nu steam
+dnf5 install -y nu steam nautilus
 dnf5 install -y niri dms wezterm
 dnf5 install -y google-roboto-fonts google-roboto-mono-fonts
 
