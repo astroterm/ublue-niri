@@ -36,13 +36,24 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
-metadata_expire=1h" | tee -a /etc/yum.repos.d/vscodium.repo
+metadata_expire=1h" | tee /etc/yum.repos.d/vscodium.repo
 
 
 # Package installation
-dnf5 install -y greetd steam nautilus codium nushell
-dnf5 install -y niri dms wezterm
-dnf5 install -y google-roboto-fonts google-roboto-mono-fonts
+dnf5 -y install \
+    greetd steam nautilus codium nushell \
+    niri dms wezterm google-roboto-fonts google-roboto-mono-fonts \
+|| {
+    echo "DNF FAILED — dumping logs"
+    ls -lah /var/log || true
+    echo "---- /var/log/dnf* ----"
+    tail -n 400 /var/log/dnf* 2>/dev/null || true
+    echo "---- /var/log/dnf5.log ----"
+    tail -n 400 /var/log/dnf5.log 2>/dev/null || true
+    echo "---- /var/log/rpm* ----"
+    tail -n 400 /var/log/rpm* 2>/dev/null || true
+    exit 1
+}
 
 # Group package installation
 dnf5 group install development-tools -y
