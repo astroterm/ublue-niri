@@ -53,7 +53,7 @@ dnf5 group install virtualization -y
 # System Unit Files
 systemctl enable podman.socket
 systemctl enable greetd
-systemctl --user enable dms
+# systemctl --user enable dms
 
 # Disable COPRs in the final image
 dnf5 -y copr disable avengemedia/dms
