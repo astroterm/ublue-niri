@@ -17,12 +17,30 @@ set -ouex pipefail
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 
-# Copr
+# COPR
 dnf5 -y copr enable avengemedia/dms
 dnf5 -y copr enable wezfurlong/wezterm-nightly
 
+# Repositories
+echo "[gemfury-nushell]
+name=Gemfury Nushell Repo
+baseurl=https://yum.fury.io/nushell/
+enabled=1
+gpgcheck=0
+gpgkey=https://yum.fury.io/nushell/gpg.key" | tee /etc/yum.repos.d/fury-nushell.repo
+
+echo "[gitlab.com_paulcarroty_vscodium_repo]
+name=gitlab.com_paulcarroty_vscodium_repo
+baseurl=https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+metadata_expire=1h" | tee -a /etc/yum.repos.d/vscodium.repo
+
+
 # Package installation
-dnf5 install -y nu steam nautilus
+dnf5 install -y greetd steam nautilus codium nushell
 dnf5 install -y niri dms wezterm
 dnf5 install -y google-roboto-fonts google-roboto-mono-fonts
 
@@ -36,5 +54,6 @@ systemctl enable podman.socket
 systemctl enable greetd
 systemctl --user enable dms
 
+# Disable COPRs in the final image
 dnf5 -y copr disable avengemedia/dms
 dnf5 -y copr disable wezfurlong/wezterm-nightly
